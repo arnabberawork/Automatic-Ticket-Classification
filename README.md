@@ -14,61 +14,55 @@
 
 
 ## Problem Statement
-Let’s consider a hypothetical example of a health tech company called ‘BeHealthy’. Suppose ‘BeHealthy’ aims to connect the medical communities with millions of patients across the country. 
-
-‘BeHealthy’ has a web platform that allows doctors to list their services and manage patient interactions and provides services for patients such as booking interactions with doctors and ordering medicines online. Here, doctors can easily organise appointments, track past medical records and provide e-prescriptions.
-So, companies like ‘BeHealthy’ are providing medical services, prescriptions and online consultations and generating huge data day by day.
-Let’s take a look at the following snippet of medical data that may be generated when a doctor is writing notes to his/her patient or as a review of a therapy that he or she has done.
-
-“The patient was a 62-year-old man with squamous cell lung cancer, which was first successfully treated by a combination of radiation therapy and chemotherapy.”
-As you can see in this text, a person with a non-medical background cannot understand the various medical terms. We have taken a simple sentence from a medical data set to understand the problem and where you can understand the terms ‘cancer’ and ‘chemotherapy’. 
-
-Suppose you have been given such a data set in which a lot of text is written related to the medical domain. As you can see in the dataset, there are a lot of diseases that can be mentioned in the entire dataset and their related treatments are also mentioned implicitly in the text, which you saw in the aforementioned example that the disease mentioned is cancer and its treatment can be identified as chemotherapy using the sentence.
-
-But, note that it is not explicitly mentioned in the dataset about the diseases and their treatment, but somehow, you can build an algorithm to map the diseases and their respective treatment.
-
-Suppose you have been asked to determine the disease name and its probable treatment from the dataset and list it out in the form of a table or a dictionary like this. 
-After discussing the problem given above, you need to build a custom NER to get the list of diseases and their treatment from the dataset.
-
-Download the dataset given below.
-
-[Train Sentence Dataset]( https://github.com/arnabberawork/Syntactic-Processing-Assignment/blob/main/train_sent )
-
-[Train Label Dataset]( https://github.com/arnabberawork/Syntactic-Processing-Assignment/blob/main/train_label )
-
-[Test Sentence Dataset]( https://github.com/arnabberawork/Syntactic-Processing-Assignment/blob/main/test_sent )
-
-[Test Label Dataset]( https://github.com/arnabberawork/Syntactic-Processing-Assignment/blob/main/test_label )
-
-Here, you need to understand that each word in this dataset is provided in a single line. So, first, you need to club all these words together to form the sentences. Moreover, there are blank lines given in the dataset that have been highlighted in the image given above. These blank lines indicate that a new sentence is starting from the next line onwards to the next blank line.
+For a financial company, customer complaints carry a lot of importance, as they are often an indicator of the shortcomings in their products and services. If these complaints are resolved efficiently in time, they can bring down customer dissatisfaction to a minimum and retain them with stronger loyalty. This also gives them an idea of how to continuously improve their services to attract more customers. 
+These customer complaints are unstructured text data; so, traditionally, companies need to allocate the task of evaluating and assigning each ticket to the relevant department to multiple support employees. This becomes tedious as the company grows and has a large customer base.
+In this case study, you will be working as an NLP engineer for a financial company that wants to automate its customer support tickets system. As a financial company, the firm has many products and services such as credit cards, banking and mortgages/loans. 
 
 ## Objectives
-The objective of this project is to build a custom Named Entity Recognition (NER) model that can extract and categorize diseases and their associated treatments from unstructured medical text data. The solution should:
+You need to build a model that is able to classify customer complaints based on the products/services. By doing so, you can segregate these tickets into their relevant categories and, therefore, help in the quick resolution of the issue.
+With the help of non-negative matrix factorization (NMF), an approach under topic modelling, you will detect patterns and recurring words present in each ticket. This can be then used to understand the important features for each cluster of categories. By segregating the clusters, you will be able to identify the topics of the customer complaints. 
+You will be doing topic modelling on the .json data provided by the company. Since this data is not labelled, you need to apply NMF to analyse patterns and classify tickets into the following five clusters based on their products/services:
+    - Credit card / Prepaid card
+    - Bank account services
+    - Theft/Dispute reporting
+    - Mortgages/loans
+    - Others 
 
-- You need to process and modify the data into sentence format. This step has to be done for the 'train_sent' and ‘train_label’ datasets and for test datasets as well.
-- After that, you need to define the features to build the CRF model.
-- Then, you need to apply these features in each sentence of the train and the test dataset to get the feature values.
-- Once the features are computed, you need to define the target variable and then build the CRF model.
-- Then, you need to perform the evaluation using a test data set.
-- After that, you need to create a dictionary in which diseases are keys and treatments are values.
+With the help of topic modelling, you will be able to map each ticket onto its respective department/category. You can then use this data to train any supervised model such as logistic regression, decision tree or random forest. Using this trained model, you can classify any new customer complaint support ticket into its relevant department.
+Download the dataset given below.
+
+The data set given to you is in the .json format and contains 78,313 customer complaints with 22 features. You need to convert this to a dataframe in order to process the given complaints.
+
+[Dataset]( https://github.com/arnabberawork/Automatic-Ticket-Classification/blob/main/complaints-2021-05-14_08_16.json )
 
 ## Approach
 
 - Step 1: Workspace set up: Import and Install Necessary Libraries
 - Step 2: Load the Data and Understanding the Data
-- Step 3: Data Preparation Steps - construct the proper sentences from individual words 
-- Step 4: Concept Identification - Exploratory Data Analysis
-- Step 5: Defining features for CRF
-- Step 6: Define input and target variables
-- Step 7: Build the CRF Model
-- Step 8: Evaluation
-- Step 9: Making Predictions Using the Model
+- Step 3: Text preprocessing
+- Step 4: Exploratory data analysis (EDA)
+- Step 5: Feature extraction
+- Step 6: Topic modelling 
+- Step 7: Model building using supervised learning
+- Step 8: Model training and evaluation
+- Step 9: Model inference
+- Step 10: Evaluation
+- Step 11: Making Predictions Using the Model
+
+<b>Note</b>: Once you have finalised the clusters/categories for customer complaints, the next step is to create a data set that contains the complaints and labels (which you found using NMF). This labelled data set will be used for model building using supervised learning. 
+You need to try at least any three models from logistic regression, naive Bayes, decision tree and random forest. 
+You need to select the model that performs the best according to the evaluation metrics.
   
 ## Technologies/Libraries Used
-- Python: 3.12.3 | packaged by conda-forge | (main, Apr 15 2024, 18:20:11) [MSC v.1938 64 bit (AMD64)]
-- NumPy: 1.26.4
-- Pandas: 2.2.2
-- Spacy: 3.8.2
+    - Python: 3.12.3
+    - Numpy: 1.26.4
+    - Pandas: 2.2.2
+    - NLTK: 3.9.1
+    - SpaCy: 3.8.2
+    - Seaborn: 0.13.2
+    - Matplotlib: 3.9.2
+    - Plotly: 5.24.1
+    - Scikit-learn: 1.5.1
 
 ## Conclusions
 In this project, two models were developed to extract diseases and treatments from unstructured medical text:
@@ -92,26 +86,42 @@ Entity Linking: Add a post-processing step for linking the extracted entities to
 ## Acknowledgements
 
 - The project reference course materieals from upGrads curriculm .
-- The project references from presentation in upGrads module given by [Sumit Bhatia](https://www.linkedin.com/in/sumitonlinkedin/)
-- The project references from presentation in upGrads live class given by [Shivam Garg](https://www.linkedin.com/in/shivam-garg-0494a2ab/)
-- The project references insights and inferences from presentation in upGrads live class given by [Tanisha Medewala](https://www.linkedin.com/in/tanishamedewala/)
+- The project references from presentation in upGrads module given by [Alankar Gupta](https://www.linkedin.com/in/alankar-gupta-898a9659/)
+- The project references insights and inferences from presentation in upGrads live class given by [Dr. Apurva Kulkarni] (https://www.linkedin.com/in/dr-apurva-kulkarni-33a074189/)
+- The project references from presentation in upGrads live class given by [Amit Pandey](https://www.linkedin.com/in/amitpandeyprofile/)
 
 ## Glossary
 
+- Data Preparation
+    - Column Renaming
+    - Null Value Removal
+    - Lowercasing
+    - Text Cleaning (e.g., punctuation and square bracket removal)
+    - Removing Words with Numbers
+- Text Processing
+    - Lemmatization
+    - Part-of-Speech (POS) Tagging
 - Exploratory Data Analysis (EDA)
+    - Character Length Visualization
+    - Word Cloud Generation
+    - N-gram Frequency Analysis
 - Feature Engineering
-- Tokenization
-- Sequence Labeling
-- F1 Score
-- Training Data and Test Data
-- spaCy
-- Token Embeddings
-- Part-of-Speech (POS) Tagging
-- Dependency Parsing
-- Named Entity Recognition (NER)
-- Conditional Random Fields (CRF)
-- CRFsuite
-- Custom Feature Function
+    - Feature Extraction
+    - Topic Modeling
+    - Non-Negative Matrix Factorization - NMF
+- Model Building
+    - Logistic Regression
+    - Decision Tree Classifier
+    - Random Forest Classifier
+    - Naive Bayes Classifier
+    - XGBoost Classifier
+- Additional Concepts & Tools
+    - Tokenization
+    - spaCy
+    - Train-Test Split
+    - Model Evaluation (e.g., F1 Score)
+    - Pickle (for model saving)
+
 
 ## Author
 * [Arnab Bera]( https://www.linkedin.com/in/arnabbera-tech/ )
